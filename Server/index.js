@@ -41,11 +41,18 @@ app.post('/add', (req, res) => {
 
 const path = require("path");
 
-// Serve React frontend
-app.use(express.static(path.join(__dirname, "dist")));
+// absolute root directory (Render safe)
+const root = process.cwd();
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+// correct React build location
+const frontendPath = path.join(root, "todolist", "dist");
+
+// serve static files
+app.use(express.static(frontendPath));
+
+// SPA fallback
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 
