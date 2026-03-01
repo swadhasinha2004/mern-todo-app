@@ -39,11 +39,19 @@ app.post('/add', (req, res) => {
     .catch(err => res.json(err))
 })
 
-app.get("/", (req, res) => {
-  res.send("Backend is running");
+const path = require("path");
+
+// Serve React frontend
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 
-app.listen(3001, () => {
-    console.log("Server is Running")
-})
+
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`Server is Running on port ${PORT}`);
+});
