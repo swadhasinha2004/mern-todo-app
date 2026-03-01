@@ -1,12 +1,8 @@
 {
-  "name": "to-do-list",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "mern-todo-app",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "build": "npm install --prefix Server && npm install --prefix todolist && npm run build --prefix todolist",
+    "start": "node Server/index.js"
+  }
 }
