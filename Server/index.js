@@ -41,20 +41,16 @@ app.post('/add', (req, res) => {
 
 const path = require("path");
 
-// absolute root directory (Render safe)
 const root = process.cwd();
-
-// correct React build location
 const frontendPath = path.join(root, "todolist", "dist");
 
 // serve static files
 app.use(express.static(frontendPath));
 
-// SPA fallback
-app.get("*", (req, res) => {
+// Express 5 compatible fallback route
+app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-
 
 
 const PORT = process.env.PORT || 3001;
