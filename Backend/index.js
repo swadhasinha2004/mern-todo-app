@@ -42,13 +42,12 @@ app.post('/add', (req, res) => {
 
 const path = require("path");
 
-const root = process.cwd();
-const frontendPath = path.join(root, "todolist", "dist");
+const frontendPath = path.join(__dirname, "../Frontend/dist");
 
-// serve static files
+// serve static frontend files
 app.use(express.static(frontendPath));
 
-// Express 5 compatible fallback route
+// fallback route
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
