@@ -44,10 +44,8 @@ const path = require("path");
 
 const frontendPath = path.join(__dirname, "../Frontend/dist");
 
-// serve static frontend files
 app.use(express.static(frontendPath));
 
-// fallback route
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
