@@ -40,16 +40,6 @@ app.post('/add', (req, res) => {
     .catch(err => res.json(err))
 })
 
-const path = require("path");
-
-const frontendPath = path.join(__dirname, "../Frontend/dist");
-
-app.use(express.static(frontendPath));
-
-app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
 
 const PORT = process.env.PORT || 3001;
 
