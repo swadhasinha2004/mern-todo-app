@@ -8,11 +8,14 @@ function Home() {
   const [todos, setTodos] = useState([])
 
   // Function to fetch todos
-  const fetchTodos = () => {
-    axios.get("https://mern-todo-app-aecd.onrender.com/get")
-      .then(result => setTodos(result.data))
-      .catch(err => console.log(err))
-  }
+const fetchTodos = () => {
+axios.get("http://localhost:3001/get")
+    .then(result => {
+      console.log("API DATA:", result.data)
+      setTodos(result.data)
+    })
+    .catch(err => console.log(err))
+}
 
   // Load todos when page loads
   useEffect(() => {
@@ -27,11 +30,15 @@ function Home() {
   }
 
   // Delete task
-  const handleDelete = (id) => {
-    axios.delete("https://mern-todo-app-aecd.onrender.com/delete/" + id)
-      .then(() => fetchTodos())
-      .catch(err => console.log(err))
-  }
+ const handleDelete = (id) => {
+
+  axios.delete("http://localhost:3001/delete/" + id)
+    .then(() => {
+      fetchTodos()
+    })
+    .catch(err => console.log(err))
+
+}
 
   return (
     <div className='home'>

@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI)
 .catch(err => console.log(err))
 
 app.get('/get', (req, res) => {
-    TodoModel.find()
+  TodoModel.find()
     .then(result => res.json(result))
     .catch(err => res.json(err))
 })
@@ -26,17 +26,20 @@ app.put('/update/:id', (req, res) => {
 })
 
 app.delete('/delete/:id', (req, res) => {
-    const {id} = req.params;
-    TodoModel.findByIdAndDelete({_id: id})
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
+    const id = req.params.id;
+
+    TodoModel.findByIdAndDelete(id)
+        .then(result => res.json(result))
+        .catch(err => res.json(err))
 })
 
-app.post('/add', (req, res) => {
-    const task = req.body.task;
-    TodoModel.create({
-        task: task
-    }).then(result => res.json(result))
+app.post("/add", (req, res) => {
+  const task = req.body.task
+
+  TodoModel.create({
+    task: task
+  })
+    .then(result => res.json(result))
     .catch(err => res.json(err))
 })
 

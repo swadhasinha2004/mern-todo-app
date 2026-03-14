@@ -6,17 +6,16 @@ function Create({ refreshTodos }) {
   const [task, setTask] = useState("")
 
   const handleAdd = () => {
-    axios.post("https://mern-todo-app-aecd.onrender.com/add", { task })
+    axios.post("http://localhost:3001/add", { task })
       .then(() => {
-        setTask("")        // clear input
-        refreshTodos()     // refresh todo list
+        setTask("")
+        refreshTodos()
       })
       .catch(err => console.log(err))
   }
 
   return (
     <div className='create_form'>
-
       <input
         type="text"
         placeholder="Enter Task"
@@ -24,10 +23,7 @@ function Create({ refreshTodos }) {
         onChange={(e) => setTask(e.target.value)}
       />
 
-      <button type="button" onClick={handleAdd}>
-        Add
-      </button>
-
+      <button onClick={handleAdd}>Add</button>
     </div>
   )
 }
