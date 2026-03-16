@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+const API = "https://mern-todo-app-aecd.onrender.com";
+
 function Create({ refreshTodos }) {
 
   const [task, setTask] = useState("")
 
   const handleAdd = () => {
-    axios.post("http://localhost:3001/add", { task })
+
+    if (!task.trim()) return;
+
+    axios.post(API + "/add", { task })
       .then(() => {
         setTask("")
         refreshTodos()

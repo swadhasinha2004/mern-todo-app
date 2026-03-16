@@ -3,48 +3,40 @@ import Create from './Create'
 import axios from 'axios'
 import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
 
+const API = "https://mern-todo-app-aecd.onrender.com";
+
 function Home() {
 
   const [todos, setTodos] = useState([])
 
-  // Function to fetch todos
-const fetchTodos = () => {
-axios.get("http://localhost:3001/get")
-    .then(result => {
-      console.log("API DATA:", result.data)
-      setTodos(result.data)
-    })
-    .catch(err => console.log(err))
-}
+  const fetchTodos = () => {
+    axios.get(API + "/get")
+      .then(result => {
+        setTodos(result.data)
+      })
+      .catch(err => console.log(err))
+  }
 
-  // Load todos when page loads
   useEffect(() => {
     fetchTodos()
   }, [])
 
-  // Mark task as done
   const handleEdit = (id) => {
-    axios.put("https://mern-todo-app-aecd.onrender.com/update/" + id)
+    axios.put(API + "/update/" + id)
       .then(() => fetchTodos())
       .catch(err => console.log(err))
   }
 
-  // Delete task
- const handleDelete = (id) => {
-
-  axios.delete("http://localhost:3001/delete/" + id)
-    .then(() => {
-      fetchTodos()
-    })
-    .catch(err => console.log(err))
-
-}
+  const handleDelete = (id) => {
+    axios.delete(API + "/delete/" + id)
+      .then(() => fetchTodos())
+      .catch(err => console.log(err))
+  }
 
   return (
     <div className='home'>
       <h2>Todo List</h2>
 
-      {/* Pass refresh function to Create component */}
       <Create refreshTodos={fetchTodos} />
 
       <br />
@@ -70,12 +62,10 @@ axios.get("http://localhost:3001/get")
               </div>
 
               <div>
-                <span>
-                  <BsFillTrashFill
-                    className='icon'
-                    onClick={() => handleDelete(todo._id)}
-                  />
-                </span>
+                <BsFillTrashFill
+                  className='icon'
+                  onClick={() => handleDelete(todo._id)}
+                />
               </div>
 
             </div>
