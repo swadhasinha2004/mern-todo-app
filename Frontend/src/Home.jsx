@@ -1,21 +1,25 @@
+
+
 import React, { useEffect, useState } from 'react'
 import Create from './Create'
 import axios from 'axios'
 import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
 
-const API = "https://mern-todo-app-aecd.onrender.com";
-
+const API = "http://localhost:3001";
 function Home() {
 
   const [todos, setTodos] = useState([])
 
-  const fetchTodos = () => {
-    axios.get(API + "/get")
-      .then(result => {
-        setTodos(result.data)
-      })
-      .catch(err => console.log(err))
-  }
+ const fetchTodos = () => {
+  axios.get(API + "/get")
+    .then(result => {
+      setTodos(result.data || [])
+    })
+    .catch(err => {
+      console.log(err)
+      setTodos([])   // prevent crash
+    })
+}
 
   useEffect(() => {
     fetchTodos()
