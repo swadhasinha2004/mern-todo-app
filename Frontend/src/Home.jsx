@@ -5,7 +5,7 @@ import Create from './Create'
 import axios from 'axios'
 import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
 
-const API = "http://localhost:3001";
+const API = "https://mern-todo-app-s1bo.onrender.com";
 function Home() {
 
   const [todos, setTodos] = useState([])

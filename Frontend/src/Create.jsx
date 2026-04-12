@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const API = "http://localhost:3001";
+const API = "https://mern-todo-app-s1bo.onrender.com";
 
 function Create({ refreshTodos }) {
 
